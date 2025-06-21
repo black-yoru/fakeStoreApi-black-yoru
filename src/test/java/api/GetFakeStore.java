@@ -15,6 +15,8 @@ import java.util.Properties;
 public class GetFakeStore {
 
     private String URL;
+    private int id;
+    private int[] ids;
 
 //request untuk konfigurasi sebelum permintaan dikirim dan untuk test lain menggunakan API yang sama
 //tanpa perlu membuat class RestAssured berulang. cukup satu kali
@@ -80,5 +82,14 @@ public class GetFakeStore {
 *   Setiap method memiliki fungsinya sendiri dan helper sebagai trigger-nya */
         Response getProducts = helper.getLinkApi();
         System.out.println("result: " + getProducts.asPrettyString());
+    }
+
+
+    @Test
+    void getDataSingleProduct(){
+        id = 1;
+        int[] IDS= {2,3,4};
+        Response getSingleProduct = helper.getSingleProduct(id, IDS);
+        System.out.println("RESULT: " + getSingleProduct.asPrettyString());
     }
 }

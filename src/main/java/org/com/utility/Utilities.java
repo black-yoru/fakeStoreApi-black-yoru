@@ -19,4 +19,10 @@ public class Utilities {
                 .get("/products");
     }
 
+    public Response getSingleProduct(int id, int[] ids){
+        return requestSpecification
+                .when()
+                .get("/products/" + id + ids);
+    }
+
 }
