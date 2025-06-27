@@ -1,11 +1,10 @@
-package org.com.utility;
+package org.com.utility.report;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.List;
@@ -14,27 +13,33 @@ import java.util.Properties;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.requestSpecification;
 
-public class QaseApi {
+public class QaseApiSmokeTest {
 
     private String URL;
     private Integer idRun;
 
+    private RequestSpecification requestSpecification;
 
 
 
+/*  0. membuat method yang mengembalikan integer konteksnya disini adalah ID qase test*/
+    public int testRun() throws IOException {
 
-
-public int testRun() throws IOException {
-
+/*  1. membuat objek untuk memanggil link Qase dengan class library properties*/
     Properties props = new Properties();
     props.load(new FileInputStream("src/main/resources/option.properties"));
 
+
+/*  2. attribute URL dimasukan objek link qase io*/
     URL = props.getProperty("qase");
 
 
+/*  3.  interface restAssured spesifik agar tidak tumpang tindih masukan objek interface RestAssured dan syarat persiapan
+    untuk membuka link qase io */
     requestSpecification = RestAssured.given().baseUri(URL);
 
 
+/*  4. attribute String berikan sturktur objek Json untuk diverifikasi oleh API*/
     String requestBody =
             "{\n" +
                     "  \"title\": \"Smoke Test\",\n" +
@@ -64,7 +69,11 @@ public int testRun() throws IOException {
 
     System.out.println("id test run: " + idRun);
     return idRun;
-}
+
+    }
+
+
+
 
 
 
@@ -85,7 +94,7 @@ public int testRun() throws IOException {
 
         System.out.println("Request body:\n" + requestBody);
 
-        RestAssured.baseURI = "https://api.qase.io";
+        requestSpecification = RestAssured.given().baseUri(URL);
         Response response = given()
                 .header("token", "5f7d95bebe0ad046477be0a27ccdd52059fd8623375769c8ad2011057687eebc")
                 .header("Accept", "application/json")

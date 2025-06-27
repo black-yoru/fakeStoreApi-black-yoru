@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite1" parallel="classes" thread-count="3">
+
+    <test name="Smoke Test Positive test case">
+        <classes>
+            <class name="api.GetFakeStore"/>
+        </classes>
+    </test>
+
+
+
+    <test name="Corner Test Negative Test Case">
+        <classes>
+            <class name="api.GetFakeStoreBoundary"/>
+        </classes>
+    </test>
+
+
+
+    <test name="Rgression Test Positive and Negative test case">
+        <classes>
+            <class name="api.RegressionFakeStore">
+            </class>
+        </classes>
+    </test>
+</suite>
